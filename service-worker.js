@@ -1,4 +1,4 @@
-var CACHE = "cronograma-capilar-v1";
+var CACHE = "cronograma-capilar-v2";
 var ARQUIVOS = [
   "./",
   "./index.html",
@@ -30,6 +30,20 @@ self.addEventListener("activate", function (event) {
 
 self.addEventListener("fetch", function (event) {
   if (event.request.method !== "GET") return;
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      fetch(event.request).then(function (resposta) {
+        var copia = resposta.clone();
+        caches.open(CACHE).then(function (cache) {
+          cache.put(event.request, copia);
+        });
+        return resposta;
+      }).catch(function () {
+        return caches.match(event.request);
+      })
+    );
+    return;
+  }
   event.respondWith(
     caches.match(event.request).then(function (resposta) {
       return resposta || fetch(event.request);
