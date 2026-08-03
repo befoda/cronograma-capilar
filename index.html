@@ -24,23 +24,44 @@
       <div class="progresso">
         <div class="barra" id="barra-progresso"></div>
       </div>
-      <p class="progresso-texto" id="progresso-texto">0 de 4 etapas feitas</p>
+      <p class="progresso-texto" id="progresso-texto">0 de 4 semanas feitas</p>
     </section>
 
     <section class="card">
-      <h2>Etapas do ciclo</h2>
-      <ul id="lista-etapas" class="lista-etapas"></ul>
+      <h2>Semanas do ciclo</h2>
+      <p class="dica">Toque em uma semana para ver e marcar. Escolha os dias e os produtos de cada etapa.</p>
+      <div id="dashboard-semanas" class="dashboard-semanas"></div>
+    </section>
+
+    <section class="card" id="painel-semana" hidden>
+      <div class="ciclo-header">
+        <h2 id="painel-titulo">Semana 1</h2>
+        <button id="btn-concluir" class="btn btn-primario btn-pequeno">Marcar como feita</button>
+      </div>
+
+      <div class="controle">
+        <label for="select-tipo">Tipo da etapa:</label>
+        <select id="select-tipo"></select>
+      </div>
+
+      <h3 class="subtitulo">Dias da semana</h3>
+      <div id="chips-dias" class="chips-dias"></div>
+
+      <h3 class="subtitulo">Produtos utilizados</h3>
+      <div class="linha-adicionar">
+        <input type="text" id="input-produto" placeholder="Ex.: máscara hidratante" />
+        <button id="btn-adicionar-produto" class="btn btn-secundario">+</button>
+      </div>
+      <ul id="lista-produtos" class="lista-produtos"></ul>
     </section>
 
     <section class="card">
       <h2>Personalizar cronograma</h2>
-      <p class="dica">Escolha quantas semanas tem o seu ciclo e o tipo de cada semana (H = hidratação, N = nutrição, R = reconstrução).</p>
+      <p class="dica">Escolha quantas semanas tem o seu ciclo.</p>
       <div class="controle">
         <label for="input-semanas">Semanas por ciclo:</label>
         <input type="number" id="input-semanas" min="1" max="12" value="4" />
       </div>
-      <div id="editor-etapas" class="editor-etapas"></div>
-      <button id="btn-aplicar" class="btn btn-primario">Aplicar</button>
     </section>
 
     <footer class="footer">

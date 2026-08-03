@@ -240,3 +240,140 @@ body {
 .coracao {
   color: var(--rosa-escuro);
 }
+
+.dashboard-semanas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.card-semana {
+  position: relative;
+  background: #fff7fb;
+  border: 2px solid #ffd2e6;
+  border-radius: 14px;
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.card-semana.ativa {
+  border-color: var(--rosa-escuro);
+  box-shadow: 0 0 0 3px rgba(229, 115, 168, 0.15);
+}
+
+.card-semana.feita {
+  background: #f0fbee;
+  border-color: var(--verde);
+}
+
+.semana-numero {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.card-semana .etapa-tipo {
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.card-semana .check {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 22px;
+  height: 22px;
+  font-size: 13px;
+}
+
+.semana-info {
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.subtitulo {
+  font-size: 0.9rem;
+  color: var(--texto-suave);
+  margin: 16px 0 8px;
+}
+
+.chips-dias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip-dia {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 2px solid #ffd2e6;
+  background: var(--branco);
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.chip-dia.ativo {
+  background: var(--rosa-escuro);
+  border-color: var(--rosa-escuro);
+  color: var(--branco);
+}
+
+.linha-adicionar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.linha-adicionar input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #ffd2e6;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: var(--texto);
+}
+
+.lista-produtos {
+  list-style: none;
+}
+
+.lista-produtos li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 12px;
+  background: #fff7fb;
+  border-radius: 10px;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.btn-remover {
+  background: transparent;
+  border: none;
+  color: var(--rosa-escuro);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+.btn-secundario {
+  background: var(--rosa);
+  color: var(--branco);
+  padding: 10px 16px;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.btn-pequeno {
+  width: auto;
+  padding: 10px 16px;
+  font-size: 0.85rem;
+}
