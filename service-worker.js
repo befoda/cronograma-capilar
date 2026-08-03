@@ -1,10 +1,12 @@
-var CACHE = "cronograma-capilar-v2";
+var CACHE = "cronograma-capilar-v3";
 var ARQUIVOS = [
   "./",
   "./index.html",
   "./style.css",
   "./app.js",
-  "./manifest.json"
+  "./manifest.json",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png"
 ];
 
 self.addEventListener("install", function (event) {
