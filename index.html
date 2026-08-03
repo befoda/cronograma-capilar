@@ -5,13 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cronograma Capilar</title>
   <meta name="description" content="Acompanhe seu cronograma capilar: hidratação, nutrição e reconstrução." />
-  <meta name="theme-color" content="#ff9ecb" />
+  <meta name="theme-color" content="#f244a0" />
+
   <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon-192.png" type="image/png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400&display=swap"
+    rel="stylesheet"
+  />
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="blobs" aria-hidden="true">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+  </div>
+
   <main class="app">
     <header class="header">
+      <div class="header-emoji" aria-hidden="true">💇‍♀️</div>
       <h1>Cronograma Capilar</h1>
       <p class="subtitle">Cuide dos seus fios, ciclo por ciclo</p>
     </header>
@@ -50,7 +68,7 @@
       <h3 class="subtitulo">Produtos utilizados</h3>
       <div class="linha-adicionar">
         <input type="text" id="input-produto" placeholder="Ex.: máscara hidratante" />
-        <button id="btn-adicionar-produto" class="btn btn-secundario">+</button>
+        <button id="btn-adicionar-produto" class="btn btn-secundario" title="Adicionar produto">+</button>
       </div>
       <ul id="lista-produtos" class="lista-produtos"></ul>
     </section>
@@ -65,7 +83,7 @@
     </section>
 
     <footer class="footer">
-      <p>Feito com carinho <span class="coracao">♥</span></p>
+      <p>Feito com carinho <span class="coracao" aria-hidden="true">♥</span></p>
     </footer>
   </main>
 
