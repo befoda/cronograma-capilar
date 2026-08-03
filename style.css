@@ -1,12 +1,55 @@
+/* ============================================================
+   Cronograma Capilar — redesign moderno (design tokens)
+   Inspiração: design systems dos apps de exemplo do cookbook
+   Tema: rosa / Hello Kitty, refinado com tokens, tipografia e
+   micro-interações. Todo o app.js funciona sem alterações.
+   ============================================================ */
+
 :root {
-  --rosa: #ff9ecb;
-  --rosa-escuro: #e573a8;
-  --rosa-fundo: #fff0f7;
-  --branco: #ffffff;
-  --texto: #5b2a45;
-  --texto-suave: #a26a8b;
-  --verde: #7bc96f;
-  --sombra: 0 4px 14px rgba(229, 115, 168, 0.18);
+  color-scheme: light;
+
+  /* fontes */
+  --font-display: "Baloo 2", "Nunito Sans", -apple-system, system-ui, sans-serif;
+  --font-ui: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* escala rosa (Hello Kitty moderno) */
+  --rosa-50: #fff5fb;
+  --rosa-100: #ffe7f3;
+  --rosa-200: #ffcbe4;
+  --rosa-300: #ff9ecb;
+  --rosa-400: #ff6eb0;
+  --rosa-500: #f244a0;
+  --rosa-600: #d91f86;
+  --rosa-700: #a81469;
+
+  /* tinta */
+  --ink: #4a1f38;
+  --ink-2: #7a4a63;
+  --ink-3: #a87a92;
+  --ink-disabled: #c9a4bb;
+
+  /* semântico */
+  --ok: #2fbf7f;
+  --ok-soft: #e8f8f0;
+
+  /* superfícies */
+  --surface: #ffffff;
+  --line: rgba(242, 68, 160, 0.16);
+  --bg-a: #fff1f9;
+  --bg-b: #ffe4f3;
+
+  /* profundidade + movimento */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-1: 180ms;
+  --dur-2: 360ms;
+  --shadow-1: 0 1px 2px rgba(74, 31, 56, 0.05), 0 10px 28px rgba(242, 68, 160, 0.12);
+  --shadow-2: 0 6px 16px rgba(242, 68, 160, 0.2), 0 16px 48px rgba(242, 68, 160, 0.16);
+  --ring: 0 0 0 4px rgba(242, 68, 160, 0.16);
+
+  /* cantos */
+  --radius-1: 16px;
+  --radius-2: 22px;
+  --radius-pill: 999px;
 }
 
 * {
@@ -15,50 +58,163 @@
   padding: 0;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: var(--rosa-fundo);
-  color: var(--texto);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: linear-gradient(165deg, var(--bg-a) 0%, var(--bg-b) 100%) fixed;
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  padding: 20px 16px 60px;
+  padding: 24px 16px 64px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
+/* ---- fundo decorativo (blobs suaves) ---- */
+.blobs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+.blob-1 {
+  width: 340px;
+  height: 340px;
+  top: -80px;
+  left: -90px;
+  background: radial-gradient(circle, #ffc2df, transparent 70%);
+  animation: drift 18s var(--ease) infinite alternate;
+}
+
+.blob-2 {
+  width: 300px;
+  height: 300px;
+  top: 34%;
+  right: -110px;
+  background: radial-gradient(circle, #ffd0e8, transparent 70%);
+  animation: drift 22s var(--ease) infinite alternate-reverse;
+}
+
+.blob-3 {
+  width: 320px;
+  height: 320px;
+  bottom: -110px;
+  left: -60px;
+  background: radial-gradient(circle, #ffb6d9, transparent 70%);
+  animation: drift 26s var(--ease) infinite alternate;
+}
+
+@keyframes drift {
+  to {
+    transform: translate(30px, 24px) scale(1.08);
+  }
+}
+
+/* ---- layout ---- */
 .app {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
+/* ---- cabeçalho ---- */
 .header {
   text-align: center;
-  margin: 12px 0 24px;
+  padding: 6px 0 2px;
+}
+
+.header-emoji {
+  font-size: 2.6rem;
+  line-height: 1;
+  margin-bottom: 6px;
+  display: inline-block;
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 8px 16px rgba(242, 68, 160, 0.28));
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-7px) rotate(3deg);
+  }
 }
 
 .header h1 {
-  font-size: 1.8rem;
-  color: var(--rosa-escuro);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2rem;
   letter-spacing: 0.5px;
+  color: var(--rosa-600);
+  text-shadow: 0 2px 0 #fff, 0 10px 24px rgba(242, 68, 160, 0.25);
 }
 
 .subtitle {
-  color: var(--texto-suave);
+  color: var(--ink-2);
   margin-top: 6px;
   font-size: 0.95rem;
 }
 
+/* ---- cartões ---- */
 .card {
-  background: var(--branco);
-  border-radius: 18px;
-  box-shadow: var(--sombra);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-2);
+  box-shadow: var(--shadow-1);
   padding: 20px;
-  margin-bottom: 18px;
+  animation: fadeUp 0.5s var(--ease) both;
+}
+
+.card:nth-of-type(2) {
+  animation-delay: 0.06s;
+}
+
+.card:nth-of-type(3) {
+  animation-delay: 0.12s;
+}
+
+.card:nth-of-type(4) {
+  animation-delay: 0.18s;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .card h2 {
-  font-size: 1.05rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.12rem;
+  color: var(--rosa-600);
   margin-bottom: 14px;
-  color: var(--rosa-escuro);
 }
 
 .ciclo-header {
@@ -67,180 +223,52 @@ body {
   align-items: center;
 }
 
+.ciclo-header h2 {
+  margin-bottom: 0;
+}
+
+/* ---- barra de progresso ---- */
 .progresso {
-  height: 14px;
-  background: #ffe1ee;
-  border-radius: 999px;
+  height: 16px;
+  background: var(--rosa-100);
+  border-radius: var(--radius-pill);
   overflow: hidden;
-  margin: 14px 0 8px;
+  margin: 16px 0 10px;
+  box-shadow: inset 0 2px 4px rgba(242, 68, 160, 0.12);
 }
 
 .barra {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--rosa), var(--rosa-escuro));
-  border-radius: 999px;
-  transition: width 0.4s ease;
+  background: linear-gradient(90deg, var(--rosa-400), var(--rosa-600));
+  border-radius: var(--radius-pill);
+  position: relative;
+  transition: width 0.6s var(--ease);
+}
+
+.barra::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: translateX(-100%);
+  animation: shimmer 2.4s var(--ease) infinite;
+}
+
+@keyframes shimmer {
+  60%, 100% {
+    transform: translateX(100%);
+  }
 }
 
 .progresso-texto {
   text-align: center;
   font-size: 0.85rem;
-  color: var(--texto-suave);
-}
-
-.lista-etapas {
-  list-style: none;
-}
-
-.lista-etapas li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 10px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.lista-etapas li:hover {
-  background: #fff4fa;
-}
-
-.lista-etapas li.feita {
-  background: #f0fbee;
-}
-
-.check {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 2px solid var(--rosa);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  color: transparent;
-  flex-shrink: 0;
-  transition: all 0.2s;
-}
-
-.lista-etapas li.feita .check {
-  background: var(--verde);
-  border-color: var(--verde);
-  color: var(--branco);
-}
-
-.etapa-nome {
   font-weight: 600;
-  flex: 1;
+  color: var(--ink-2);
 }
 
-.etapa-tipo {
-  font-size: 0.8rem;
-  background: #ffe1ee;
-  color: var(--rosa-escuro);
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-weight: 600;
-}
-
-.dica {
-  font-size: 0.85rem;
-  color: var(--texto-suave);
-  margin-bottom: 14px;
-  line-height: 1.5;
-}
-
-.controle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
-  font-size: 0.95rem;
-}
-
-.controle input {
-  width: 70px;
-  padding: 8px;
-  border: 2px solid #ffd2e6;
-  border-radius: 10px;
-  font-size: 1rem;
-  color: var(--texto);
-  text-align: center;
-}
-
-.editor-etapas {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-
-.linha-editor {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.linha-editor span {
-  font-weight: 600;
-  width: 70px;
-}
-
-.linha-editor select {
-  flex: 1;
-  padding: 8px;
-  border: 2px solid #ffd2e6;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  background: var(--branco);
-  color: var(--texto);
-}
-
-.btn {
-  border: none;
-  border-radius: 12px;
-  padding: 12px 18px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.15s, opacity 0.2s;
-}
-
-.btn:active {
-  transform: scale(0.97);
-}
-
-.btn-primario {
-  background: linear-gradient(90deg, var(--rosa), var(--rosa-escuro));
-  color: var(--branco);
-  width: 100%;
-}
-
-.btn-ghost {
-  background: transparent;
-  color: var(--texto-suave);
-  border: 1.5px solid #ffd2e6;
-  padding: 8px 14px;
-  font-size: 0.85rem;
-}
-
-.btn-primario:hover {
-  opacity: 0.9;
-}
-
-.footer {
-  text-align: center;
-  color: var(--texto-suave);
-  font-size: 0.85rem;
-  margin-top: 10px;
-}
-
-.coracao {
-  color: var(--rosa-escuro);
-}
-
+/* ---- dashboard de semanas ---- */
 .dashboard-semanas {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -249,57 +277,229 @@ body {
 
 .card-semana {
   position: relative;
-  background: #fff7fb;
-  border: 2px solid #ffd2e6;
-  border-radius: 14px;
+  background: var(--rosa-50);
+  border: 2px solid var(--rosa-200);
+  border-radius: 18px;
   padding: 14px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: transform var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease),
+    box-shadow var(--dur-1) var(--ease), background var(--dur-1) var(--ease);
+}
+
+.card-semana:hover {
+  transform: translateY(-2px);
+  border-color: var(--rosa-300);
+  box-shadow: 0 10px 24px rgba(242, 68, 160, 0.14);
+}
+
+.card-semana:active {
+  transform: scale(0.98);
 }
 
 .card-semana.ativa {
-  border-color: var(--rosa-escuro);
-  box-shadow: 0 0 0 3px rgba(229, 115, 168, 0.15);
+  border-color: var(--rosa-500);
+  box-shadow: var(--ring), 0 10px 24px rgba(242, 68, 160, 0.14);
+  background: #fff;
 }
 
 .card-semana.feita {
-  background: #f0fbee;
-  border-color: var(--verde);
+  background: var(--ok-soft);
+  border-color: var(--ok);
 }
 
 .semana-numero {
+  font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.95rem;
-  margin-bottom: 6px;
+  font-size: 1rem;
+  color: var(--ink);
+  margin-bottom: 8px;
 }
 
 .card-semana .etapa-tipo {
   display: inline-block;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+}
+
+.etapa-tipo {
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 5px 11px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.02em;
 }
 
 .card-semana .check {
   position: absolute;
   top: 12px;
   right: 12px;
-  width: 22px;
-  height: 22px;
-  font-size: 13px;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+}
+
+.check {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--rosa-300);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  color: transparent;
+  flex-shrink: 0;
+  transition: all var(--dur-1) var(--ease);
+}
+
+.card-semana.feita .check {
+  background: var(--ok);
+  border-color: var(--ok);
+  color: #fff;
+  animation: pop 0.35s var(--ease);
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.5);
+  }
+  60% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .semana-info {
   font-size: 0.78rem;
-  color: var(--texto-suave);
-  margin-top: 4px;
+  color: var(--ink-2);
+  margin-top: 6px;
   line-height: 1.4;
+}
+
+/* ---- textos auxiliares ---- */
+.dica {
+  font-size: 0.86rem;
+  color: var(--ink-2);
+  margin-bottom: 16px;
+  line-height: 1.55;
 }
 
 .subtitulo {
   font-size: 0.9rem;
-  color: var(--texto-suave);
-  margin: 16px 0 8px;
+  font-weight: 700;
+  color: var(--ink-2);
+  margin: 18px 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
+/* ---- controles (select / input número) ---- */
+.controle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 0.95rem;
+  color: var(--ink-2);
+  font-weight: 600;
+}
+
+.controle input,
+.controle select {
+  padding: 9px 12px;
+  border: 2px solid var(--rosa-200);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: var(--font-ui);
+  color: var(--ink);
+  background: #fff;
+  transition: border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
+}
+
+.controle input {
+  width: 74px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.controle select {
+  flex: 1;
+  cursor: pointer;
+}
+
+.controle input:focus,
+.controle select:focus,
+.linha-adicionar input:focus {
+  outline: none;
+  border-color: var(--rosa-500);
+  box-shadow: var(--ring);
+}
+
+/* ---- botões ---- */
+.btn {
+  border: none;
+  border-radius: 14px;
+  padding: 13px 20px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: transform var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease),
+    opacity var(--dur-1) var(--ease), background var(--dur-1) var(--ease);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn-primario {
+  background: linear-gradient(135deg, var(--rosa-400), var(--rosa-600));
+  color: #fff;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(242, 68, 160, 0.3);
+}
+
+.btn-primario:hover {
+  box-shadow: 0 10px 28px rgba(242, 68, 160, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: var(--rosa-50);
+  color: var(--rosa-600);
+  border: 1.5px solid var(--rosa-200);
+  padding: 9px 15px;
+  font-size: 0.85rem;
+  border-radius: var(--radius-pill);
+}
+
+.btn-ghost:hover {
+  background: var(--rosa-100);
+}
+
+.btn-secundario {
+  background: linear-gradient(135deg, var(--rosa-400), var(--rosa-600));
+  color: #fff;
+  padding: 11px 18px;
+  font-size: 1.25rem;
+  line-height: 1;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(242, 68, 160, 0.28);
+}
+
+.btn-secundario:hover {
+  box-shadow: 0 8px 22px rgba(242, 68, 160, 0.38);
+}
+
+.btn-pequeno {
+  width: auto;
+  padding: 10px 16px;
+  font-size: 0.85rem;
+}
+
+/* ---- chips de dias ---- */
 .chips-dias {
   display: flex;
   flex-wrap: wrap;
@@ -307,36 +507,49 @@ body {
 }
 
 .chip-dia {
-  padding: 7px 14px;
-  border-radius: 999px;
-  border: 2px solid #ffd2e6;
-  background: var(--branco);
-  color: var(--texto-suave);
+  padding: 8px 15px;
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--rosa-200);
+  background: #fff;
+  color: var(--ink-2);
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.15s;
+  user-select: none;
+  transition: all var(--dur-1) var(--ease);
+}
+
+.chip-dia:hover {
+  border-color: var(--rosa-400);
+  color: var(--rosa-600);
+  transform: translateY(-1px);
 }
 
 .chip-dia.ativo {
-  background: var(--rosa-escuro);
-  border-color: var(--rosa-escuro);
-  color: var(--branco);
+  background: linear-gradient(135deg, var(--rosa-400), var(--rosa-600));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(242, 68, 160, 0.3);
+  transform: scale(1.04);
 }
 
+/* ---- produtos ---- */
 .linha-adicionar {
   display: flex;
   gap: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .linha-adicionar input {
   flex: 1;
-  padding: 10px;
-  border: 2px solid #ffd2e6;
-  border-radius: 10px;
+  padding: 11px 14px;
+  border: 2px solid var(--rosa-200);
+  border-radius: 14px;
   font-size: 0.95rem;
-  color: var(--texto);
+  font-family: var(--font-ui);
+  color: var(--ink);
+  background: #fff;
+  transition: border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
 }
 
 .lista-produtos {
@@ -348,32 +561,68 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 9px 12px;
-  background: #fff7fb;
-  border-radius: 10px;
-  margin-bottom: 6px;
+  padding: 10px 14px;
+  background: var(--rosa-50);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  margin-bottom: 8px;
   font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  animation: fadeUp 0.3s var(--ease) both;
 }
 
 .btn-remover {
   background: transparent;
   border: none;
-  color: var(--rosa-escuro);
-  font-size: 1rem;
+  color: var(--rosa-600);
+  font-size: 1.05rem;
   cursor: pointer;
-  padding: 2px 6px;
+  padding: 2px 7px;
+  border-radius: 10px;
+  transition: background var(--dur-1) var(--ease);
 }
 
-.btn-secundario {
-  background: var(--rosa);
-  color: var(--branco);
-  padding: 10px 16px;
-  font-size: 1.2rem;
-  line-height: 1;
+.btn-remover:hover {
+  background: var(--rosa-100);
 }
 
-.btn-pequeno {
-  width: auto;
-  padding: 10px 16px;
+/* ---- rodapé ---- */
+.footer {
+  text-align: center;
+  color: var(--ink-3);
   font-size: 0.85rem;
+  margin-top: 6px;
+}
+
+.coracao {
+  color: var(--rosa-500);
+  display: inline-block;
+  animation: heartbeat 1.6s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.25);
+  }
+  40% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.18);
+  }
+}
+
+/* ---- acessibilidade: reduzir movimento ---- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
