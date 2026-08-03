@@ -1,0 +1,10 @@
+{
+  "name": "Cronograma Capilar",
+  "short_name": "Cronograma",
+  "description": "Acompanhe seu cronograma capilar: hidratação, nutrição e reconstrução.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff0f7",
+  "theme_color": "#ff9ecb",
+  "orientation": "portrait"
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cronograma Capilar</title>
+  <meta name="description" content="Acompanhe seu cronograma capilar: hidratação, nutrição e reconstrução." />
+  <meta name="theme-color" content="#ff9ecb" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <h1>Cronograma Capilar</h1>
+      <p class="subtitle">Cuide dos seus fios, ciclo por ciclo</p>
+    </header>
+
+    <section class="card ciclo-card">
+      <div class="ciclo-header">
+        <h2 id="ciclo-titulo">Ciclo 1</h2>
+        <button id="btn-reset" class="btn btn-ghost" title="Reiniciar o ciclo">Reiniciar</button>
+      </div>
+      <div class="progresso">
+        <div class="barra" id="barra-progresso"></div>
+      </div>
+      <p class="progresso-texto" id="progresso-texto">0 de 4 etapas feitas</p>
+    </section>
+
+    <section class="card">
+      <h2>Etapas do ciclo</h2>
+      <ul id="lista-etapas" class="lista-etapas"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Personalizar cronograma</h2>
+      <p class="dica">Escolha quantas semanas tem o seu ciclo e o tipo de cada semana (H = hidratação, N = nutrição, R = reconstrução).</p>
+      <div class="controle">
+        <label for="input-semanas">Semanas por ciclo:</label>
+        <input type="number" id="input-semanas" min="1" max="12" value="4" />
+      </div>
+      <div id="editor-etapas" class="editor-etapas"></div>
+      <button id="btn-aplicar" class="btn btn-primario">Aplicar</button>
+    </section>
+
+    <footer class="footer">
+      <p>Feito com carinho <span class="coracao">♥</span></p>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
