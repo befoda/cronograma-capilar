@@ -4,7 +4,27 @@
   "description": "Acompanhe seu cronograma capilar: hidratação, nutrição e reconstrução.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#fff0f7",
-  "theme_color": "#ff9ecb",
-  "orientation": "portrait"
+  "background_color": "#fff1f9",
+  "theme_color": "#f244a0",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
 }
