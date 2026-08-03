@@ -1,4 +1,4 @@
-var CACHE = "cronograma-capilar-v3";
+var CACHE = "cronograma-capilar-v4";
 var ARQUIVOS = [
   "./",
   "./index.html",
@@ -12,7 +12,11 @@ var ARQUIVOS = [
 self.addEventListener("install", function (event) {
   event.waitUntil(
     caches.open(CACHE).then(function (cache) {
-      return cache.addAll(ARQUIVOS);
+      return Promise.all(
+        ARQUIVOS.map(function (arquivo) {
+          return cache.add(new Request(arquivo, { cache: "reload" }));
+        })
+      );
     })
   );
   self.skipWaiting();
@@ -30,11 +34,17 @@ self.addEventListener("activate", function (event) {
   self.clients.claim();
 });
 
+function ehDinamico(url) {
+  return url.origin === self.location.origin && /\.(html|css|js)$/.test(url.pathname);
+}
+
 self.addEventListener("fetch", function (event) {
   if (event.request.method !== "GET") return;
-  if (event.request.mode === "navigate") {
+  var url = new URL(event.request.url);
+
+  if (event.request.mode === "navigate" || ehDinamico(url)) {
     event.respondWith(
-      fetch(event.request).then(function (resposta) {
+      fetch(event.request, { cache: "reload" }).then(function (resposta) {
         var copia = resposta.clone();
         caches.open(CACHE).then(function (cache) {
           cache.put(event.request, copia);
@@ -46,6 +56,7 @@ self.addEventListener("fetch", function (event) {
     );
     return;
   }
+
   event.respondWith(
     caches.match(event.request).then(function (resposta) {
       return resposta || fetch(event.request);
